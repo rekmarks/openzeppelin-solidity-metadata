@@ -1,1 +1,178 @@
-{"PausableToken": ["Pausable", "StandardToken"], "BurnableToken": ["BasicToken"], "Claimable": ["Ownable"], "FinalizableCrowdsale": ["Ownable", "TimedCrowdsale"], "TokenDestructible": ["Ownable"], "ERC721BasicToken": ["ERC721Basic"], "ERC827": ["ERC20"], "HasNoContracts": ["Ownable"], "CanReclaimToken": ["Ownable"], "ERC721": ["ERC721Basic", "ERC721Enumerable", "ERC721Metadata"], "Ownable": [], "RBAC": [], "ERC721Basic": ["SupportsInterfaceWithLookup"], "WhitelistedCrowdsale": ["Crowdsale", "Ownable"], "MintedCrowdsale": ["Crowdsale"], "Destructible": ["Ownable"], "Bounty": ["Destructible", "PullPayment"], "TokenVesting": ["Ownable"], "ERC721Enumerable": ["ERC721Basic"], "DetailedERC20": ["ERC20"], "SupportsInterfaceWithLookup": ["ERC165"], "StandardToken": ["BasicToken", "ERC20"], "StandardBurnableToken": ["BurnableToken", "StandardToken"], "AllowanceCrowdsale": ["Crowdsale"], "TimedCrowdsale": ["Crowdsale"], "Pausable": ["Ownable"], "ERC827Token": ["ERC827", "StandardToken"], "RefundVault": ["Ownable"], "TokenTimelock": [], "ReentrancyGuard": [], "NoOwner": ["HasNoContracts", "HasNoEther", "HasNoTokens"], "RBACMintableToken": ["MintableToken", "RBAC"], "ERC20": ["ERC20Basic"], "ERC721Holder": ["ERC721Receiver"], "IncreasingPriceCrowdsale": ["TimedCrowdsale"], "RefundableCrowdsale": ["FinalizableCrowdsale"], "CappedCrowdsale": ["Crowdsale"], "Target": [], "SplitPayment": [], "Superuser": ["Ownable", "RBAC"], "MintableToken": ["Ownable", "StandardToken"], "DeprecatedERC721": ["ERC721"], "DelayedClaimable": ["Claimable"], "Crowdsale": [], "CappedToken": ["MintableToken"], "ERC721Token": ["ERC721", "ERC721BasicToken"], "HasNoEther": ["Ownable"], "LimitBalance": [], "ERC721Receiver": [], "ERC721Metadata": ["ERC721Basic"], "PullPayment": [], "BasicToken": ["ERC20Basic"], "PostDeliveryCrowdsale": ["TimedCrowdsale"], "Whitelist": ["Ownable", "RBAC"], "Heritable": ["Ownable"], "HasNoTokens": ["CanReclaimToken"], "Contactable": ["Ownable"], "SignatureBouncer": ["Ownable", "RBAC"], "IndividuallyCappedCrowdsale": ["Crowdsale", "Ownable"], "ERC20Basic": []}
+{
+  "PausableToken": [
+    "Pausable", 
+    "StandardToken"
+  ], 
+  "BurnableToken": [
+    "BasicToken"
+  ], 
+  "Claimable": [
+    "Ownable"
+  ], 
+  "FinalizableCrowdsale": [
+    "Ownable", 
+    "TimedCrowdsale"
+  ], 
+  "TokenDestructible": [
+    "Ownable"
+  ], 
+  "ERC721BasicToken": [
+    "ERC721Basic"
+  ], 
+  "ERC827": [
+    "ERC20"
+  ], 
+  "HasNoContracts": [
+    "Ownable"
+  ], 
+  "CanReclaimToken": [
+    "Ownable"
+  ], 
+  "ERC721": [
+    "ERC721Basic", 
+    "ERC721Enumerable", 
+    "ERC721Metadata"
+  ], 
+  "Ownable": [], 
+  "RBAC": [], 
+  "ERC721Basic": [
+    "SupportsInterfaceWithLookup"
+  ], 
+  "WhitelistedCrowdsale": [
+    "Crowdsale", 
+    "Ownable"
+  ], 
+  "MintedCrowdsale": [
+    "Crowdsale"
+  ], 
+  "Destructible": [
+    "Ownable"
+  ], 
+  "Bounty": [
+    "Destructible", 
+    "PullPayment"
+  ], 
+  "TokenVesting": [
+    "Ownable"
+  ], 
+  "ERC721Enumerable": [
+    "ERC721Basic"
+  ], 
+  "DetailedERC20": [
+    "ERC20"
+  ], 
+  "SupportsInterfaceWithLookup": [
+    "ERC165"
+  ], 
+  "StandardToken": [
+    "BasicToken", 
+    "ERC20"
+  ], 
+  "StandardBurnableToken": [
+    "BurnableToken", 
+    "StandardToken"
+  ], 
+  "AllowanceCrowdsale": [
+    "Crowdsale"
+  ], 
+  "TimedCrowdsale": [
+    "Crowdsale"
+  ], 
+  "Pausable": [
+    "Ownable"
+  ], 
+  "ERC827Token": [
+    "ERC827", 
+    "StandardToken"
+  ], 
+  "RefundVault": [
+    "Ownable"
+  ], 
+  "TokenTimelock": [], 
+  "ReentrancyGuard": [], 
+  "NoOwner": [
+    "HasNoContracts", 
+    "HasNoEther", 
+    "HasNoTokens"
+  ], 
+  "RBACMintableToken": [
+    "MintableToken", 
+    "RBAC"
+  ], 
+  "ERC20": [
+    "ERC20Basic"
+  ], 
+  "ERC721Holder": [
+    "ERC721Receiver"
+  ], 
+  "IncreasingPriceCrowdsale": [
+    "TimedCrowdsale"
+  ], 
+  "RefundableCrowdsale": [
+    "FinalizableCrowdsale"
+  ], 
+  "CappedCrowdsale": [
+    "Crowdsale"
+  ], 
+  "Target": [], 
+  "SplitPayment": [], 
+  "Superuser": [
+    "Ownable", 
+    "RBAC"
+  ], 
+  "MintableToken": [
+    "Ownable", 
+    "StandardToken"
+  ], 
+  "DeprecatedERC721": [
+    "ERC721"
+  ], 
+  "DelayedClaimable": [
+    "Claimable"
+  ], 
+  "Crowdsale": [], 
+  "CappedToken": [
+    "MintableToken"
+  ], 
+  "ERC721Token": [
+    "ERC721", 
+    "ERC721BasicToken"
+  ], 
+  "HasNoEther": [
+    "Ownable"
+  ], 
+  "LimitBalance": [], 
+  "ERC721Receiver": [], 
+  "ERC721Metadata": [
+    "ERC721Basic"
+  ], 
+  "PullPayment": [], 
+  "BasicToken": [
+    "ERC20Basic"
+  ], 
+  "PostDeliveryCrowdsale": [
+    "TimedCrowdsale"
+  ], 
+  "Whitelist": [
+    "Ownable", 
+    "RBAC"
+  ], 
+  "Heritable": [
+    "Ownable"
+  ], 
+  "HasNoTokens": [
+    "CanReclaimToken"
+  ], 
+  "Contactable": [
+    "Ownable"
+  ], 
+  "SignatureBouncer": [
+    "Ownable", 
+    "RBAC"
+  ], 
+  "IndividuallyCappedCrowdsale": [
+    "Crowdsale", 
+    "Ownable"
+  ], 
+  "ERC20Basic": []
+}

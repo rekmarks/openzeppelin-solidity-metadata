@@ -6,6 +6,8 @@ import json
 CONTRACTS_FILENAME = "../metadata/openzeppelin-solidity-contracts.json"
 DEPENDENCIES_FILENAME = "../metadata/openzeppelin-solidity-dependencies.json"
 
+INDENT_LEVEL = 2
+
 
 if len(argv) != 2:
     exit("Usage: %s [.../openzeppelin-solidity]" % argv[0])
@@ -94,7 +96,7 @@ if path.isfile(CONTRACTS_FILENAME):
 
 # create and write contracts file
 with open(CONTRACTS_FILENAME, "w") as contracts_file:
-    json.dump(contracts, contracts_file)
+    json.dump(contracts, contracts_file, indent=INDENT_LEVEL)
 
 # remove dependencies file if it already exists
 if path.isfile(DEPENDENCIES_FILENAME):
@@ -102,4 +104,4 @@ if path.isfile(DEPENDENCIES_FILENAME):
 
 # create and write dependencies file
 with open(DEPENDENCIES_FILENAME, "w") as dependencies_file:
-    json.dump(dependencies, dependencies_file)
+    json.dump(dependencies, dependencies_file, indent=INDENT_LEVEL)

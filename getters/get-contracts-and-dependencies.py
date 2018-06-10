@@ -1,3 +1,9 @@
+'''
+Author: Erik Marks (github.com/rekmarks)
+
+Script for retrieving contract names and dependencies from the OpenZeppelin 
+Solidity library.
+'''
 
 from os import walk, remove, path
 from sys import argv, exit

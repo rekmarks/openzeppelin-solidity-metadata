@@ -104,4 +104,4 @@ if path.isfile(DEPENDENCIES_FILENAME):
 
 # create and write dependencies file
 with open(DEPENDENCIES_FILENAME, "w") as dependencies_file:
-    json.dump(dependencies, dependencies_file, indent=INDENT_LEVEL)
+    json.dump(dependencies, dependencies_file, indent=INDENT_LEVEL, sort_keys=True)

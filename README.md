@@ -1,8 +1,12 @@
 # openzeppelin-solidity-metadata
 OpenZeppelin Solidity metadata, for now merely contract dependencies, in JSON format
 
-JSON data in /metadata up to date as of most recent commit
+## usage
+To re-generate data, run the desired getter in your terminal, in the `./getters` directory
 
-To re-generate data, run desired getter in your terminal
+Getters assume Unix file structure
 
-Getters should be compatible with OSX and Linux
+## notes
+JSON data in `./metadata` up to date with OpenZeppelin library as of most recent commit
+
+The `Bounty` contract actually requires the `Target` contract to function, as specified in `openzeppelin-solidity/contracts/Bounty.sol`

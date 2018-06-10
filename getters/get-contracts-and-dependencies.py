@@ -3,7 +3,9 @@ from os import walk, remove, path
 from sys import argv, exit
 import json
 
-JSON_FILENAME = "../metadata/openzeppelin-solidity-dependencies.json"
+CONTRACTS_FILENAME = "../metadata/openzeppelin-solidity-contracts.json"
+DEPENDENCIES_FILENAME = "../metadata/openzeppelin-solidity-dependencies.json"
+
 
 if len(argv) != 2:
     exit("Usage: %s [.../openzeppelin-solidity]" % argv[0])
@@ -73,21 +75,31 @@ for (dirpath, dirnames, filenames) in walk(argv[1]):
 
                     dependencies[contract_name].sort()
 
+# get contract names
+contracts = dependencies.keys()
+contracts.sort()
+
 # for visualizing output
-# contracts = dependencies.keys()
-# contracts.sort()
 # for key in contracts:
 #     print(key)
 #     for d in dependencies[key]:
 #         print("\t" + d)
 #     print
 
-# Write dependencies as JSON
+# Write contracts and dependencies as JSON
+
+# remove contracts file if it already exists
+if path.isfile(CONTRACTS_FILENAME):
+    remove(CONTRACTS_FILENAME)
+
+# create and write contracts file
+with open(CONTRACTS_FILENAME, "w") as contracts_file:
+    json.dump(contracts, contracts_file)
 
 # remove dependencies file if it already exists
-if path.isfile(JSON_FILENAME):
-    remove(JSON_FILENAME)
+if path.isfile(DEPENDENCIES_FILENAME):
+    remove(DEPENDENCIES_FILENAME)
 
-# create and write file
-with open(JSON_FILENAME, "w+") as json_file:
-    json.dump(dependencies, json_file)
+# create and write dependencies file
+with open(DEPENDENCIES_FILENAME, "w") as dependencies_file:
+    json.dump(dependencies, dependencies_file)

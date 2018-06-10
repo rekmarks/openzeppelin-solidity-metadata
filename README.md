@@ -1,5 +1,7 @@
 # openzeppelin-solidity-metadata
-OpenZeppelin Solidity metadata, for now merely contract dependencies, in JSON format
+OpenZeppelin Solidity metadata, for now merely contract dependencies, in JSON format.
+
+Not endorsed by or affiliated with Zeppelin or the OpenZeppelin maintainers.
 
 ## usage
 To re-generate data, run the desired getter in your terminal, in the `./getters` directory

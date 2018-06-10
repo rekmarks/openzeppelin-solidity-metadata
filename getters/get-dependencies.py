@@ -31,7 +31,7 @@ for (dirpath, dirnames, filenames) in walk(argv[1]):
 
             for line in file:
 
-                # nevermind libraries for now
+                # ignore libraries
                 if line.find("library") == 0:
                     break
 
@@ -45,7 +45,7 @@ for (dirpath, dirnames, filenames) in walk(argv[1]):
                     
                     contract_name = split_line[1]
 
-                    # add contract to contracts list and dependencies dict
+                    # add contract to dependencies dict
                     dependencies[contract_name] = []
 
                     # find dependencies
@@ -56,6 +56,7 @@ for (dirpath, dirnames, filenames) in walk(argv[1]):
                     # get dependencies
                     tokens = line[is_index + 4:].split()
 
+                    # iterate over dependencies (last token is "{\n")
                     for i in range(len(tokens) - 1):
 
                         current_token = tokens[i]
@@ -87,6 +88,6 @@ for (dirpath, dirnames, filenames) in walk(argv[1]):
 if path.isfile(JSON_FILENAME):
     remove(JSON_FILENAME)
 
-# # create and write file
+# create and write file
 with open(JSON_FILENAME, "w+") as json_file:
     json.dump(dependencies, json_file)

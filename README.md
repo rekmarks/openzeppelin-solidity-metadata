@@ -9,4 +9,6 @@ Getters assume Unix file structure
 ## notes
 JSON data in `./metadata` up to date with OpenZeppelin library as of most recent commit
 
+Ignores `openzeppelin-solidity/contracts/mocks` and `openzeppelin-solidity/contracts/examples`
+
 The `Bounty` contract actually requires the `Target` contract to function, as specified in `openzeppelin-solidity/contracts/Bounty.sol`

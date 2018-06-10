@@ -42,7 +42,7 @@ for (dirpath, dirnames, filenames) in walk(argv[1]):
                 # parse contract
                 if line.find("contract") == 0:
 
-                    # for manually verifying contract declaration lines
+                    # testing: manually verify contract declaration lines
                     # print(line)
 
                     split_line = line.split()
@@ -77,18 +77,11 @@ for (dirpath, dirnames, filenames) in walk(argv[1]):
 
                     dependencies[contract_name].sort()
 
+# Write contracts and dependencies as JSON
+
 # get contract names
 contracts = dependencies.keys()
 contracts.sort()
-
-# for visualizing output
-# for key in contracts:
-#     print(key)
-#     for d in dependencies[key]:
-#         print("\t" + d)
-#     print
-
-# Write contracts and dependencies as JSON
 
 # remove contracts file if it already exists
 if path.isfile(CONTRACTS_FILENAME):

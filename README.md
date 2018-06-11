@@ -18,4 +18,4 @@ Ignores `openzeppelin-solidity/contracts/mocks` and `openzeppelin-solidity/contr
 The `Bounty` contract actually requires the `Target` contract to function, as specified in `openzeppelin-solidity/contracts/Bounty.sol`
 
 ## dev
-To re-generate data, clone the repo and run the desired getter in your terminal, in the `./getters` directory
+To re-generate data, clone the repo and run the desired getter in your terminal, in the `./getters` directory, after running `npm install`

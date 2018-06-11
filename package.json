@@ -1,0 +1,23 @@
+{
+  "name": "openzeppelin-solidity-metadata",
+  "version": "1.0.0",
+  "description": "OpenZeppelin Solidity metadata in JSON format",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/rekmarks/openzeppelin-solidity-metadata.git"
+  },
+  "keywords": ["solidity", "ethereum", "smart contracts", "OpenZeppelin"],
+  "author": {
+    "name": "Erik Marks",
+    "url": "https://github.com/rekmarks"
+    },
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/rekmarks/openzeppelin-solidity-metadata/issues"
+  },
+  "homepage": "https://github.com/rekmarks/openzeppelin-solidity-metadata#readme"
+}

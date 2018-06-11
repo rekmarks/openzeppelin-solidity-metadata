@@ -6,9 +6,9 @@ Not endorsed by or affiliated with Zeppelin or the OpenZeppelin maintainers.
 ## usage
 Install using `npm install openzeppelin-solidity-metadata`. After importing the package, you can access the following properties:
 - `contracts`
-    - A sorted list of OpenZeppelin contract names
+    - A sorted array of OpenZeppelin contract names
 - `dependencies`
-    - An object of OpenZeppelin contract name keys to list values of dependencies
+    - An object of OpenZeppelin contract name strings to sorted arrays of dependencies
 
 ## notes
 JSON data in `./metadata` up to date with OpenZeppelin library as of most recent commit

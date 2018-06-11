@@ -1,6 +1,6 @@
 {
   "name": "openzeppelin-solidity-metadata",
-  "version": "1.0.2",
+  "version": "1.0.3",
   "description": "OpenZeppelin Solidity metadata in JSON format",
   "main": "index.js",
   "scripts": {

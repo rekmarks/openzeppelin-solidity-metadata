@@ -11,7 +11,7 @@ Install using `npm install openzeppelin-solidity-metadata`. After importing the 
     - An object of OpenZeppelin contract name strings to sorted arrays of dependencies
 
 ## notes
-JSON data in `./metadata` up to date with OpenZeppelin library as of most recent commit
+JSON data current as of OpenZeppelin `1.10.0`
 
 Ignores `openzeppelin-solidity/contracts/mocks` and `openzeppelin-solidity/contracts/examples`
 

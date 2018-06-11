@@ -12,22 +12,21 @@ import json
 CONTRACTS_FILENAME = "../metadata/openzeppelin-solidity-contracts.json"
 DEPENDENCIES_FILENAME = "../metadata/openzeppelin-solidity-dependencies.json"
 
+OPENZEPPELIN_PATH = "../node_modules/openzeppelin-solidity"
+
 INDENT_LEVEL = 2
-
-
-if len(argv) != 2:
-    exit("Usage: %s [.../openzeppelin-solidity]" % argv[0])
 
 dependencies = {}
 
 # Get dependencies
 
 # walk through openzeppelin directory
-for (dirpath, dirnames, filenames) in walk(argv[1]):
+for (dirpath, dirnames, filenames) in walk(OPENZEPPELIN_PATH):
 
+    ### only if using repo instead of npm dist ###
     # ignore mocks and examples
-    if dirpath.endswith("mocks") or dirpath.endswith("examples"):
-        continue
+    # if dirpath.endswith("mocks") or dirpath.endswith("examples"):
+    #     continue
 
     # for filename in current directory
     for filename in filenames:
@@ -48,7 +47,7 @@ for (dirpath, dirnames, filenames) in walk(argv[1]):
                 # parse contract
                 if line.find("contract") == 0:
 
-                    # testing: manually verify contract declaration lines
+                    ### testing: manually verify contract declaration lines ###
                     # print(line)
 
                     split_line = line.split()

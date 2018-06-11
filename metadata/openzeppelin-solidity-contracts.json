@@ -51,7 +51,6 @@
   "StandardBurnableToken", 
   "StandardToken", 
   "Superuser", 
-  "SupportsInterfaceWithLookup", 
   "Target", 
   "TimedCrowdsale", 
   "TokenDestructible", 

@@ -49,9 +49,7 @@
     "ERC721Enumerable", 
     "ERC721Metadata"
   ], 
-  "ERC721Basic": [
-    "SupportsInterfaceWithLookup"
-  ], 
+  "ERC721Basic": [], 
   "ERC721BasicToken": [
     "ERC721Basic"
   ], 
@@ -152,9 +150,6 @@
   "Superuser": [
     "Ownable", 
     "RBAC"
-  ], 
-  "SupportsInterfaceWithLookup": [
-    "ERC165"
   ], 
   "Target": [], 
   "TimedCrowdsale": [

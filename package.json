@@ -24,5 +24,8 @@
   "bugs": {
     "url": "https://github.com/rekmarks/openzeppelin-solidity-metadata/issues"
   },
-  "homepage": "https://github.com/rekmarks/openzeppelin-solidity-metadata#readme"
+  "homepage": "https://github.com/rekmarks/openzeppelin-solidity-metadata#readme",
+  "devDependencies": {
+    "openzeppelin-solidity": "^1.10.0"
+  }
 }

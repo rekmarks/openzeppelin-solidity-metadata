@@ -9,14 +9,21 @@ from os import walk, remove, path
 from sys import argv, exit
 import json
 
-CONTRACTS_FILENAME = "../metadata/openzeppelin-solidity-contracts.json"
-DEPENDENCIES_FILENAME = "../metadata/openzeppelin-solidity-dependencies.json"
-
+# input file root path
 OPENZEPPELIN_PATH = "../node_modules/openzeppelin-solidity"
 
+# output file paths
+CONTRACT_NAMES_PATH = "../metadata/openzeppelin-solidity-contracts.json"
+CONTRACT_DEPENDENCIES_PATH = "../metadata/openzeppelin-solidity-dependencies.json"
+LIBRARY_NAMES_PATH = "../metadata/openzeppelin-solidity-libraries.json"
+
+# formatting
 INDENT_LEVEL = 2
 
-dependencies = {}
+# storage
+contract_names = []
+contract_dependencies = {}
+library_names = []
 
 # Get dependencies
 
@@ -42,7 +49,13 @@ for (dirpath, dirnames, filenames) in walk(OPENZEPPELIN_PATH):
 
                 # ignore libraries
                 if line.find("library") == 0:
-                    break
+                    
+                    ### testing: manually verify library declaration lines ###
+                    # print(line)
+
+                    split_line = line.split()
+                    
+                    library_names.append(split_line[1])
 
                 # parse contract
                 if line.find("contract") == 0:
@@ -53,9 +66,10 @@ for (dirpath, dirnames, filenames) in walk(OPENZEPPELIN_PATH):
                     split_line = line.split()
                     
                     contract_name = split_line[1]
+                    contract_names.append(contract_name)
 
                     # add contract to dependencies dict
-                    dependencies[contract_name] = []
+                    contract_dependencies[contract_name] = []
 
                     # find dependencies
                     is_index = line.find(" is ")
@@ -78,28 +92,36 @@ for (dirpath, dirnames, filenames) in walk(OPENZEPPELIN_PATH):
                             continue # ignore non-alphanumeric tokens     
 
                         # add dependency
-                        dependencies[contract_name].append(current_token)
+                        contract_dependencies[contract_name].append(current_token)
 
-                    dependencies[contract_name].sort()
+                    contract_dependencies[contract_name].sort()
 
 # Write contracts and dependencies as JSON
 
-# get contract names
-contracts = dependencies.keys()
-contracts.sort()
+# sort contract and library names
+contract_names.sort()
+library_names.sort()
 
 # remove contracts file if it already exists
-if path.isfile(CONTRACTS_FILENAME):
-    remove(CONTRACTS_FILENAME)
+if path.isfile(CONTRACT_NAMES_PATH):
+    remove(CONTRACT_NAMES_PATH)
 
 # create and write contracts file
-with open(CONTRACTS_FILENAME, "w") as contracts_file:
-    json.dump(contracts, contracts_file, indent=INDENT_LEVEL)
+with open(CONTRACT_NAMES_PATH, "w") as contracts_file:
+    json.dump(contract_names, contracts_file, indent=INDENT_LEVEL)
 
 # remove dependencies file if it already exists
-if path.isfile(DEPENDENCIES_FILENAME):
-    remove(DEPENDENCIES_FILENAME)
+if path.isfile(CONTRACT_DEPENDENCIES_PATH):
+    remove(CONTRACT_DEPENDENCIES_PATH)
 
 # create and write dependencies file
-with open(DEPENDENCIES_FILENAME, "w") as dependencies_file:
-    json.dump(dependencies, dependencies_file, indent=INDENT_LEVEL, sort_keys=True)
+with open(CONTRACT_DEPENDENCIES_PATH, "w") as dependencies_file:
+    json.dump(contract_dependencies, dependencies_file, indent=INDENT_LEVEL, sort_keys=True)
+
+# remove libraries file if it already exists
+if path.isfile(LIBRARY_NAMES_PATH):
+    remove(LIBRARY_NAMES_PATH)
+
+# create and write libraries file
+with open(LIBRARY_NAMES_PATH, "w") as libraries_file:
+    json.dump(library_names, libraries_file, indent=INDENT_LEVEL)

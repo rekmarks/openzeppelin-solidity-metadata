@@ -1,16 +1,20 @@
 # openzeppelin-solidity-metadata
 OpenZeppelin Solidity metadata, in JSON format.
 
-Not endorsed by or affiliated with Zeppelin or the OpenZeppelin maintainers.
+Not endorsed by or affiliated with Zeppelin or OpenZeppelin.
 
 ## usage
 Install using `npm install openzeppelin-solidity-metadata`. After importing the package, you can access the following properties:
 - `contracts`
-    - A sorted array of the OpenZeppelin contract names
-- `dependencies`
-    - An object of all OpenZeppelin contract names as strings to sorted arrays of dependencies
+    - an object of all OpenZeppelin contract names as strings to object values
+        - `compiled`
+            - the compiled contract, from `solc.compile()`
+        - `dependencies`
+            - a sorted array of dependencies
 - `libraries`
-    - A sorted array of the OpenZeppelin library names
+    - an object of OpenZeppelin library names to object values
+        - `compiled`
+            - the compiled library, from `solc.compile()`
 
 ## notes
 - JSON data current as of OpenZeppelin `1.10.0`

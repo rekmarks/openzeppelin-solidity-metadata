@@ -1,9 +1,9 @@
-[
-  "AddressUtils", 
-  "ECRecovery", 
-  "Math", 
-  "MerkleProof", 
-  "Roles", 
-  "SafeERC20", 
-  "SafeMath"
-]
+{
+  "AddressUtils": {}, 
+  "ECRecovery": {}, 
+  "Math": {}, 
+  "MerkleProof": {}, 
+  "Roles": {}, 
+  "SafeERC20": {}, 
+  "SafeMath": {}
+}

@@ -16,11 +16,11 @@ Install using `npm install openzeppelin-solidity-metadata`. After importing the 
         - `compiled`
             - the compiled library, from `solc.compile()`
 
-## notes
+### notes
 - JSON data current as of OpenZeppelin `1.10.0`
 - Does not include `openzeppelin-solidity/contracts/mocks` and `openzeppelin-solidity/contracts/examples` from the OpenZeppelin repo
-- The `Bounty` contract actually requires the `Target` contract to function, as specified in `openzeppelin-solidity/contracts/Bounty.sol`
-- OpenZeppelin libraries don't have dependencies
+- The `Bounty` contract requires the `Target` contract to function, even though it does not *depend* on it
+- OpenZeppelin libraries have no dependencies
 
 ## dev
 To re-generate data, clone the repo and run the desired getter in your terminal, in the `./getters` directory, after running `npm install`

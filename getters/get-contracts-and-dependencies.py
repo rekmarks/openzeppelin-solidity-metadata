@@ -81,13 +81,14 @@ for (dirpath, dirnames, filenames) in walk(OPENZEPPELIN_PATH):
 
                     # add contract to dependencies dict
                     contracts[contract_name] = {}
-                    contracts[contract_name]["dependencies"] = []
                     filepaths[contract_name] = current_path
 
                     # find dependencies
                     is_index = line.find(" is ")
                     if is_index == -1:
                         continue # if no dependencies, we are done
+
+                    contracts[contract_name]["dependencies"] = []
 
                     # get dependencies
                     tokens = line[is_index + 4:].split()

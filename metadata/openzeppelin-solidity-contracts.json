@@ -45,9 +45,7 @@
       "Ownable"
     ]
   }, 
-  "Crowdsale": {
-    "dependencies": []
-  }, 
+  "Crowdsale": {}, 
   "DelayedClaimable": {
     "dependencies": [
       "Claimable"
@@ -73,9 +71,7 @@
       "ERC20Basic"
     ]
   }, 
-  "ERC20Basic": {
-    "dependencies": []
-  }, 
+  "ERC20Basic": {}, 
   "ERC721": {
     "dependencies": [
       "ERC721Basic", 
@@ -83,9 +79,7 @@
       "ERC721Metadata"
     ]
   }, 
-  "ERC721Basic": {
-    "dependencies": []
-  }, 
+  "ERC721Basic": {}, 
   "ERC721BasicToken": {
     "dependencies": [
       "ERC721Basic"
@@ -106,9 +100,7 @@
       "ERC721Basic"
     ]
   }, 
-  "ERC721Receiver": {
-    "dependencies": []
-  }, 
+  "ERC721Receiver": {}, 
   "ERC721Token": {
     "dependencies": [
       "ERC721", 
@@ -163,9 +155,7 @@
       "Ownable"
     ]
   }, 
-  "LimitBalance": {
-    "dependencies": []
-  }, 
+  "LimitBalance": {}, 
   "MintableToken": {
     "dependencies": [
       "Ownable", 
@@ -184,9 +174,7 @@
       "HasNoTokens"
     ]
   }, 
-  "Ownable": {
-    "dependencies": []
-  }, 
+  "Ownable": {}, 
   "Pausable": {
     "dependencies": [
       "Ownable"
@@ -203,21 +191,15 @@
       "TimedCrowdsale"
     ]
   }, 
-  "PullPayment": {
-    "dependencies": []
-  }, 
-  "RBAC": {
-    "dependencies": []
-  }, 
+  "PullPayment": {}, 
+  "RBAC": {}, 
   "RBACMintableToken": {
     "dependencies": [
       "MintableToken", 
       "RBAC"
     ]
   }, 
-  "ReentrancyGuard": {
-    "dependencies": []
-  }, 
+  "ReentrancyGuard": {}, 
   "RefundVault": {
     "dependencies": [
       "Ownable"
@@ -234,9 +216,7 @@
       "RBAC"
     ]
   }, 
-  "SplitPayment": {
-    "dependencies": []
-  }, 
+  "SplitPayment": {}, 
   "StandardBurnableToken": {
     "dependencies": [
       "BurnableToken", 
@@ -255,9 +235,7 @@
       "RBAC"
     ]
   }, 
-  "Target": {
-    "dependencies": []
-  }, 
+  "Target": {}, 
   "TimedCrowdsale": {
     "dependencies": [
       "Crowdsale"
@@ -268,9 +246,7 @@
       "Ownable"
     ]
   }, 
-  "TokenTimelock": {
-    "dependencies": []
-  }, 
+  "TokenTimelock": {}, 
   "TokenVesting": {
     "dependencies": [
       "Ownable"

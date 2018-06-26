@@ -53,23 +53,23 @@ let parameters = {
 
 for (let key in contracts) {
 
+  /** compileStandardWrapper 
+   * currently results in solc throwing a JSON formatting error
+   * see parameters declaration above for input JSON
+   */
   solFiles = {}
 
   solFiles[key + '.sol'] = {}
   solFiles[key + '.sol']['content'] = fs.readFileSync(filepaths[key], 'utf8')
 
-  // solFiles[key] = fs.readFileSync(filepaths[key], 'utf8')
-
   if (contracts[key].hasOwnProperty('dependencies')) {
     for (let dependency of contracts[key]['dependencies']) {
 
       solFiles[dependency + '.sol'] = {}
-      solFiles[dependency + '.sol']['content'] = fs.readFileSync(filepaths[dependency], 'utf8')
-      
-      // solFiles[dependency + '.sol'] = fs.readFileSync(filepaths[dependency], 'utf8')
+      solFiles[dependency + '.sol']['content'] = fs.readFileSync(filepaths[dependency], 'utf8')      
     }
   }
-  
+
   parameters.sources = solFiles
 
   contracts[key]['compiled'] = solc.compileStandardWrapper(
@@ -77,6 +77,24 @@ for (let key in contracts) {
     function (path) {
       return {error: 'File not found with path: ' + path}
   })
+  /**/
+
+  /**
+   * compile (regular)
+   * compiles but outputs no abi, opcodes, bytecode, or assembly
+   */
+  // solFiles = {}
+
+  // solFiles[key] = fs.readFileSync(filepaths[key], 'utf8')
+
+  // if (contracts[key].hasOwnProperty('dependencies')) {
+  //   for (let dependency of contracts[key]['dependencies']) {      
+  //     solFiles[dependency + '.sol'] = fs.readFileSync(filepaths[dependency], 'utf8')
+  //   }
+  // }
+
+  // contracts[key]['compiled'] = solc.compile({sources: solFiles}, 1)
+  /**/
 }
 
 for (let key in libraries) {

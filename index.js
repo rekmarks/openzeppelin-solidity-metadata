@@ -7,102 +7,70 @@ const filepaths = require('./metadata/openzeppelin-solidity-filepaths.json')
 let contracts = require('./metadata/openzeppelin-solidity-contracts.json')
 let libraries = require('./metadata/openzeppelin-solidity-libraries.json')
 
-//////// test
+let inheritables
 
-// var _getAllFilesFromFolder = function(dir) {
-
-//     var filesystem = require("fs");
-//     var results = [];
-
-//     filesystem.readdirSync(dir).forEach(function(file) {
-
-//         file = dir+'/'+file;
-//         var stat = filesystem.statSync(file);
-
-//         if (stat && stat.isDirectory()) {
-//             results = results.concat(_getAllFilesFromFolder(file))
-//         } else results.push(file);
-
-//     });
-
-//     return results;
-
-// };
-
-// console.log(_getAllFilesFromFolder("./node_modules/openzeppelin-solidity/contracts"))
-
-//////// test
-
-// solc parameters
-let solFiles
-let parameters = {
-  language: "Solidity",
-  sources: {},
-  settings: {
-    metadata: {
-      // Use only literal content and not URLs (false by default)
-      useLiteralContent: true
-    },
-    outputSelection: {
-      "*": {
-        "*": [ "abi", "evm.bytecode"]
-      }
-    }
-  }
-}
-
-for (let key in contracts) {
-
-  /** compileStandardWrapper 
-   * currently results in solc throwing a JSON formatting error
-   * see parameters declaration above for input JSON
-   */
-  solFiles = {}
-
-  solFiles[key + '.sol'] = {}
-  solFiles[key + '.sol']['content'] = fs.readFileSync(filepaths[key], 'utf8')
-
-  if (contracts[key].hasOwnProperty('dependencies')) {
-    for (let dependency of contracts[key]['dependencies']) {
-
-      solFiles[dependency + '.sol'] = {}
-      solFiles[dependency + '.sol']['content'] = fs.readFileSync(filepaths[dependency], 'utf8')      
-    }
-  }
-
-  parameters.sources = solFiles
-
-  contracts[key]['compiled'] = solc.compileStandardWrapper(
-    parameters.toString(),
-    function (path) {
-      return {error: 'File not found with path: ' + path}
-  })
-  /**/
-
-  /**
-   * compile (regular)
-   * compiles but outputs no abi, opcodes, bytecode, or assembly
-   */
-  // solFiles = {}
-
-  // solFiles[key] = fs.readFileSync(filepaths[key], 'utf8')
-
-  // if (contracts[key].hasOwnProperty('dependencies')) {
-  //   for (let dependency of contracts[key]['dependencies']) {      
-  //     solFiles[dependency + '.sol'] = fs.readFileSync(filepaths[dependency], 'utf8')
-  //   }
-  // }
-
-  // contracts[key]['compiled'] = solc.compile({sources: solFiles}, 1)
-  /**/
-}
-
-for (let key in libraries) {
-
-  libraries[key]['compiled'] = solc.compile(fs.readFileSync(filepaths[key], 'utf8'), 1)
-}
+initializeExports()
 
 module.exports = {
   'contracts': contracts,
   'libraries': libraries
+}
+
+/**
+ * [initializeExports description]
+ * @return {[type]} [description]
+ */
+function initializeExports() {
+  for (let key in contracts) {
+
+  inheritables = getDependencies({}, [ key ])
+
+  contracts[key]['compiled'] = solc.compile({sources: inheritables}, 1, (path) => {
+    let split_path = path.split('/')
+    return {contents: inheritables[split_path[split_path.length - 1]]}
+  })
+  }
+
+  for (let key in libraries) {
+    libraries[key]['compiled'] = solc.compile(fs.readFileSync(filepaths[key], 'utf8'), 1)
+  }
+}
+
+/**
+ * [getDependencies description]
+ * @param  {[type]} solFiles     [description]
+ * @param  {[type]} dependencies [description]
+ * @return {[type]}              [description]
+ */
+function getDependencies(solFiles, dependencies) {
+
+  // input validation
+  if (!solFiles || !dependencies || dependencies.length < 0) {
+    throw new Error('Invalid input')
+  }
+
+  // base case
+  if (dependencies.length === 0) { 
+    return solFiles 
+  }
+
+  // remove first element
+  let inheritable = dependencies.shift()
+
+  // if we have yet to see this contract or library
+  if (!solFiles.hasOwnProperty(inheritable + '.sol')) {
+
+    // add contract or library source to solFiles
+    solFiles[inheritable + '.sol'] = fs.readFileSync(filepaths[inheritable], 'utf8')
+
+    // add contract's dependencies to the dependencies array, ignoring libraries
+    if (    !libraries.hasOwnProperty(inheritable) 
+        &&  contracts[inheritable].hasOwnProperty('dependencies')) 
+      {
+      for (let dependency of contracts[inheritable]['dependencies']) {
+        dependencies.push(dependency)
+      }
+    }
+  }
+  return getDependencies(solFiles, dependencies)
 }

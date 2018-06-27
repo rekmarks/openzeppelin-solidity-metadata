@@ -54,6 +54,9 @@ for (dirpath, dirnames, filenames) in walk(OPENZEPPELIN_PATH):
 
             current_path = current_path[1:] # from "../" to "./"
 
+            library_name = ""
+            contract_name = ""
+
             for line in file:
 
                 # parse library
@@ -88,7 +91,8 @@ for (dirpath, dirnames, filenames) in walk(OPENZEPPELIN_PATH):
                     if is_index == -1:
                         continue # if no dependencies, we are done
 
-                    contracts[contract_name]["dependencies"] = []
+                    if "dependencies" not in contracts[contract_name]:
+                        contracts[contract_name]["dependencies"] = []
 
                     # get dependencies
                     tokens = line[is_index + 4:].split()
@@ -109,6 +113,28 @@ for (dirpath, dirnames, filenames) in walk(OPENZEPPELIN_PATH):
                         contracts[contract_name]["dependencies"].append(current_token)
 
                     contracts[contract_name]["dependencies"].sort()
+
+                # add library used by contract as dependency
+                elif line.find("using ") != -1:
+
+                    split_line = line.split()
+
+                    # "using" must be the first token
+                    if split_line[0] != "using":
+                        continue
+
+                    # sanity check/defensive programming
+                    if len(contract_name) > 0 and len(library_name) > 0:
+                        raise RuntimeError("library_name and contract_name simultaneously non-empty")
+                    if len(library_name) > 0:
+                        raise RuntimeError("library_name non-empty and found 'using' statement")
+                    if len(contract_name) == 0:
+                        raise RuntimeError("contract_name empty and found 'using' statement")
+
+                    # add dependency (will always be the second token)
+                    if "dependencies" not in contracts[contract_name]:
+                        contracts[contract_name]["dependencies"] = []
+                    contracts[contract_name]["dependencies"].append(split_line[1])
 
 # Write contracts and dependencies as JSON
 

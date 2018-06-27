@@ -1,12 +1,14 @@
 {
   "AllowanceCrowdsale": {
     "dependencies": [
-      "Crowdsale"
+      "Crowdsale", 
+      "SafeMath"
     ]
   }, 
   "BasicToken": {
     "dependencies": [
-      "ERC20Basic"
+      "ERC20Basic", 
+      "SafeMath"
     ]
   }, 
   "Bounty": {
@@ -22,12 +24,14 @@
   }, 
   "CanReclaimToken": {
     "dependencies": [
-      "Ownable"
+      "Ownable", 
+      "SafeERC20"
     ]
   }, 
   "CappedCrowdsale": {
     "dependencies": [
-      "Crowdsale"
+      "Crowdsale", 
+      "SafeMath"
     ]
   }, 
   "CappedToken": {
@@ -45,7 +49,11 @@
       "Ownable"
     ]
   }, 
-  "Crowdsale": {}, 
+  "Crowdsale": {
+    "dependencies": [
+      "SafeMath"
+    ]
+  }, 
   "DelayedClaimable": {
     "dependencies": [
       "Claimable"
@@ -82,7 +90,9 @@
   "ERC721Basic": {}, 
   "ERC721BasicToken": {
     "dependencies": [
-      "ERC721Basic"
+      "ERC721Basic", 
+      "SafeMath", 
+      "AddressUtils"
     ]
   }, 
   "ERC721Enumerable": {
@@ -121,7 +131,8 @@
   "FinalizableCrowdsale": {
     "dependencies": [
       "Ownable", 
-      "TimedCrowdsale"
+      "TimedCrowdsale", 
+      "SafeMath"
     ]
   }, 
   "HasNoContracts": {
@@ -146,13 +157,15 @@
   }, 
   "IncreasingPriceCrowdsale": {
     "dependencies": [
-      "TimedCrowdsale"
+      "TimedCrowdsale", 
+      "SafeMath"
     ]
   }, 
   "IndividuallyCappedCrowdsale": {
     "dependencies": [
       "Crowdsale", 
-      "Ownable"
+      "Ownable", 
+      "SafeMath"
     ]
   }, 
   "LimitBalance": {}, 
@@ -188,11 +201,20 @@
   }, 
   "PostDeliveryCrowdsale": {
     "dependencies": [
-      "TimedCrowdsale"
+      "TimedCrowdsale", 
+      "SafeMath"
     ]
   }, 
-  "PullPayment": {}, 
-  "RBAC": {}, 
+  "PullPayment": {
+    "dependencies": [
+      "SafeMath"
+    ]
+  }, 
+  "RBAC": {
+    "dependencies": [
+      "Roles"
+    ]
+  }, 
   "RBACMintableToken": {
     "dependencies": [
       "MintableToken", 
@@ -202,21 +224,28 @@
   "ReentrancyGuard": {}, 
   "RefundVault": {
     "dependencies": [
-      "Ownable"
+      "Ownable", 
+      "SafeMath"
     ]
   }, 
   "RefundableCrowdsale": {
     "dependencies": [
-      "FinalizableCrowdsale"
+      "FinalizableCrowdsale", 
+      "SafeMath"
     ]
   }, 
   "SignatureBouncer": {
     "dependencies": [
       "Ownable", 
-      "RBAC"
+      "RBAC", 
+      "ECRecovery"
     ]
   }, 
-  "SplitPayment": {}, 
+  "SplitPayment": {
+    "dependencies": [
+      "SafeMath"
+    ]
+  }, 
   "StandardBurnableToken": {
     "dependencies": [
       "BurnableToken", 
@@ -238,7 +267,8 @@
   "Target": {}, 
   "TimedCrowdsale": {
     "dependencies": [
-      "Crowdsale"
+      "Crowdsale", 
+      "SafeMath"
     ]
   }, 
   "TokenDestructible": {
@@ -246,10 +276,16 @@
       "Ownable"
     ]
   }, 
-  "TokenTimelock": {}, 
+  "TokenTimelock": {
+    "dependencies": [
+      "SafeERC20"
+    ]
+  }, 
   "TokenVesting": {
     "dependencies": [
-      "Ownable"
+      "Ownable", 
+      "SafeMath", 
+      "SafeERC20"
     ]
   }, 
   "Whitelist": {

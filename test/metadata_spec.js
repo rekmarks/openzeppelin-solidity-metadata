@@ -27,9 +27,11 @@ describe('metadata format and contents', () => {
 
     it('metadata object values have correct properties', () => {
 
-      console.log(contracts['ERC20'].compiled)
+      // console.log(contracts['Ownable'].compiled)
+      // console.log('\n')
+      console.log(contracts['StandardToken'].compiled)
       console.log('\n')
-      console.log(libraries['Math'].compiled)
+      // console.log(libraries['Math'].compiled)
 
     })
   })

@@ -1,5 +1,6 @@
-const chai = require('chai')
-const expect = chai.expect
+const expect = require('chai').expect
+// const should = require('chai').should
+// const expect = chai.expect
 
 describe('contract and library metadata', () => {
 
@@ -8,9 +9,8 @@ describe('contract and library metadata', () => {
   const libraries = data.libraries
   const filepaths = require('../metadata/openzeppelin-solidity-filepaths.json')
 
-  // manual verification
-  console.log(contracts)
-  console.log('\n')
+  // console.log(contracts)
+  // console.log('\n')
   // console.log(libraries)
   // console.log('\n')
   // console.log(filepaths)
@@ -35,16 +35,15 @@ describe('contract and library metadata', () => {
 
     for (let key in contracts) {
       for (let _key in contracts[key]) {
-        expect(contracts[key][_key])
+        expect(typeof contracts[key][_key] !== 'undefined')
       }
     }
     for (let key in libraries) {
       for (let _key in libraries[key]) {
-        expect(libraries[key][_key])
+        expect(typeof libraries[key][_key] !== 'undefined')
       }
     }
 
-    // manual verification
     // console.log(contracts['StandardToken'].compiled)
     // console.log('\n')
     // console.log(libraries['Math'].compiled)
@@ -65,12 +64,7 @@ describe('contract and library metadata', () => {
             expect(Array.isArray(contracts[key][_key]))
           case 'compiled':
             expect(typeof contracts[key][_key] === 'object')
-            console.log(contracts[key])
             expect(typeof contracts[key][_key]['opcodes'] === 'string')
-            // for (let __key in contracts[key][_key]) {
-            //   expect(typeof __key === 'string')
-            //   expect(typeof contracts[key][_key][__key]['opcodes'] === 'string')
-            // }
         }
       }
     }
@@ -82,6 +76,8 @@ describe('contract and library metadata', () => {
       for (let _key in libraries[key]) {
 
         switch (_key) {
+          case 'dependencies':
+            expect(Array.isArray(libraries[key][_key]))
           case 'compiled':
             expect(typeof libraries[key][_key] === 'object')
             expect(typeof libraries[key][_key]['opcodes'] === 'string')

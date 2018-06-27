@@ -2,6 +2,7 @@
   "AllowanceCrowdsale": {
     "dependencies": [
       "Crowdsale", 
+      "ERC20", 
       "SafeMath"
     ]
   }, 
@@ -24,6 +25,7 @@
   }, 
   "CanReclaimToken": {
     "dependencies": [
+      "ERC20Basic", 
       "Ownable", 
       "SafeERC20"
     ]
@@ -51,6 +53,7 @@
   }, 
   "Crowdsale": {
     "dependencies": [
+      "ERC20", 
       "SafeMath"
     ]
   }, 
@@ -82,17 +85,16 @@
   "ERC20Basic": {}, 
   "ERC721": {
     "dependencies": [
-      "ERC721Basic", 
-      "ERC721Enumerable", 
-      "ERC721Metadata"
+      "ERC721Basic"
     ]
   }, 
   "ERC721Basic": {}, 
   "ERC721BasicToken": {
     "dependencies": [
+      "AddressUtils", 
       "ERC721Basic", 
-      "SafeMath", 
-      "AddressUtils"
+      "ERC721Receiver", 
+      "SafeMath"
     ]
   }, 
   "ERC721Enumerable": {
@@ -131,8 +133,8 @@
   "FinalizableCrowdsale": {
     "dependencies": [
       "Ownable", 
-      "TimedCrowdsale", 
-      "SafeMath"
+      "SafeMath", 
+      "TimedCrowdsale"
     ]
   }, 
   "HasNoContracts": {
@@ -157,8 +159,8 @@
   }, 
   "IncreasingPriceCrowdsale": {
     "dependencies": [
-      "TimedCrowdsale", 
-      "SafeMath"
+      "SafeMath", 
+      "TimedCrowdsale"
     ]
   }, 
   "IndividuallyCappedCrowdsale": {
@@ -177,7 +179,8 @@
   }, 
   "MintedCrowdsale": {
     "dependencies": [
-      "Crowdsale"
+      "Crowdsale", 
+      "MintableToken"
     ]
   }, 
   "NoOwner": {
@@ -201,8 +204,9 @@
   }, 
   "PostDeliveryCrowdsale": {
     "dependencies": [
-      "TimedCrowdsale", 
-      "SafeMath"
+      "ERC20", 
+      "SafeMath", 
+      "TimedCrowdsale"
     ]
   }, 
   "PullPayment": {
@@ -231,14 +235,15 @@
   "RefundableCrowdsale": {
     "dependencies": [
       "FinalizableCrowdsale", 
+      "RefundVault", 
       "SafeMath"
     ]
   }, 
   "SignatureBouncer": {
     "dependencies": [
+      "ECRecovery", 
       "Ownable", 
-      "RBAC", 
-      "ECRecovery"
+      "RBAC"
     ]
   }, 
   "SplitPayment": {
@@ -264,7 +269,12 @@
       "RBAC"
     ]
   }, 
-  "Target": {}, 
+  "Target": {
+    "dependencies": [
+      "Destructible", 
+      "PullPayment"
+    ]
+  }, 
   "TimedCrowdsale": {
     "dependencies": [
       "Crowdsale", 
@@ -273,6 +283,7 @@
   }, 
   "TokenDestructible": {
     "dependencies": [
+      "ERC20Basic", 
       "Ownable"
     ]
   }, 
@@ -283,9 +294,10 @@
   }, 
   "TokenVesting": {
     "dependencies": [
+      "ERC20Basic", 
       "Ownable", 
-      "SafeMath", 
-      "SafeERC20"
+      "SafeERC20", 
+      "SafeMath"
     ]
   }, 
   "Whitelist": {

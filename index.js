@@ -6,6 +6,8 @@ const filepaths = require('./metadata/openzeppelin-solidity-filepaths.json')
 
 let contracts = require('./metadata/openzeppelin-solidity-contracts.json')
 let libraries = require('./metadata/openzeppelin-solidity-libraries.json')
+let allKeys = Object.keys(contracts)
+allKeys.concat(Object.keys(libraries))
 
 initializeExports()
 
@@ -20,10 +22,24 @@ module.exports = {
  */
 function initializeExports() {
 
-  let inheritables, compiled
+  console.log('compiling...\n')
 
-  // iterate through contracts
-  for (let key in contracts) {
+  let inheritables, compiled, collection
+
+  // iterate through contracts and libraries
+  // (let key in allKeys) doesn't work here for some reason
+  for (let i = 0; i < allKeys.length; i++) {
+
+    let key = allKeys[i]
+
+    console.log(key)
+
+    // point to the correct collection object
+    if (contracts.hasOwnProperty(key)) {
+      collection = contracts
+    } else {
+      collection = libraries
+    }
 
     inheritables = getDependencySources({}, [ key ])
 
@@ -37,34 +53,27 @@ function initializeExports() {
     })
 
     if (Object.keys(compiled.contracts).length === 0) {
-      console.log(key + '\n')
-      console.log(compiled.errors)
+      throw new Error('contract or library ' + key + ' didn\'t compile')
     }
 
-    // store only the target compiled contract
-    contracts[key]['compiled'] = compiled['contracts'][key + '.sol:' + key]
+    // store only the target compiled contract or library
+    collection[key]['compiled'] = compiled['contracts'][key + '.sol:' + key]
   }
-  throw new Error('exit')
-
-  // iterate through libraries, compiling them outright as they have no dependencies
-  for (let key in libraries) {
-    compiled = solc.compile(fs.readFileSync(filepaths[key], 'utf8'), 1)
-    libraries[key]['compiled'] = compiled['contracts'][':' + key]
-  }
+  console.log('\nall contracts and libraries compiled')
 }
 
 /**
  * Gets all dependency sources of the OpenZeppelin contract names passed in,
- * including themselves. Depends on the contracts global object.
+ * including themselves. Depends on the contracts and libraries global objects.
  * @param  {object} solFiles     an empty object, {}
- * @param  {array}  dependencies an array of contract names
- * @return {object}              an object of contract file name strings to 
+ * @param  {array}  dependencies an array of dependency names
+ * @return {object}              an object of file name strings to 
  *                               source code strings
  */
 function getDependencySources(solFiles, dependencies) {
 
   // input validation
-  if (!solFiles || !dependencies || dependencies.length < 0) {
+  if (!solFiles || !Array.isArray(dependencies) || dependencies.length < 0) {
     throw new Error('Invalid input')
   }
 
@@ -76,17 +85,22 @@ function getDependencySources(solFiles, dependencies) {
   // remove first element
   let inheritable = dependencies.shift()
 
+  let collection
+  if (contracts.hasOwnProperty(inheritable)) {
+    collection = contracts
+  } else {
+    collection = libraries
+  }
+
   // if we have yet to see this contract or library
   if (!solFiles.hasOwnProperty(inheritable + '.sol')) {
 
     // add contract source to solFiles
     solFiles[inheritable + '.sol'] = fs.readFileSync(filepaths[inheritable], 'utf8')
 
-    // add contract's dependencies to the dependencies array, ignoring libraries
-    if (    !libraries.hasOwnProperty(inheritable) 
-        &&  contracts[inheritable].hasOwnProperty('dependencies')) 
-      {
-      for (let dependency of contracts[inheritable]['dependencies']) {
+    // add current item's dependencies to the dependencies array
+    if (collection[inheritable].hasOwnProperty('dependencies')) {
+      for (let dependency of collection[inheritable]['dependencies']) {
         dependencies.push(dependency)
       }
     }

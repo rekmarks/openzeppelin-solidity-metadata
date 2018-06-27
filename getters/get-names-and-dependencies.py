@@ -10,17 +10,11 @@ from sys import argv, exit
 import json
 
 # input file root path
-OPENZEPPELIN_PATH = "../node_modules/openzeppelin-solidity"
+OPENZEPPELIN_PATH = "./node_modules/openzeppelin-solidity"
 
-# output file paths
-# CONTRACT_NAMES_PATH = "../metadata/openzeppelin-solidity-contracts.json"
-# CONTRACT_DEPENDENCIES_PATH = "../metadata/openzeppelin-solidity-dependencies.json"
-# LIBRARY_NAMES_PATH = "../metadata/openzeppelin-solidity-libraries.json"
-# FILE_PATHS_PATH = "../metadata/openzeppelin-solidity-filepaths.json"
-
-CONTRACTS_PATH = "../metadata/openzeppelin-solidity-contracts.json"
-LIBRARIES_PATH = "../metadata/openzeppelin-solidity-libraries.json"
-FILE_PATHS_PATH = "../metadata/openzeppelin-solidity-filepaths.json"
+CONTRACTS_PATH = "./metadata/openzeppelin-solidity-contracts.json"
+LIBRARIES_PATH = "./metadata/openzeppelin-solidity-libraries.json"
+FILE_PATHS_PATH = "./metadata/openzeppelin-solidity-filepaths.json"
 
 # formatting
 INDENT_LEVEL = 2
@@ -61,12 +55,13 @@ for (dirpath, dirnames, filenames) in walk(OPENZEPPELIN_PATH):
 
             for line in file:
 
+                # parse imports
                 if line.find("import") == 0:
 
                     split_line = line.split("/")
 
                     current_import = split_line[-1]
-                    current_import = current_import[:-2]
+                    current_import = current_import[:-7] # .sol";\n
 
                     if current_import in imports:
                         raise RuntimeError("import already added")
@@ -86,6 +81,25 @@ for (dirpath, dirnames, filenames) in walk(OPENZEPPELIN_PATH):
                     libraries[library_name] = {}
                     filepaths[library_name] = current_path
 
+                    if len(imports) == 0:
+                        continue
+
+                    libraries[library_name]["dependencies"] = []
+
+                    # iterate over imports to add depdendencies
+                    for i in range(len(imports)):
+
+                        current_import = imports[i]
+
+                        if not current_import.isalnum():
+                            raise RuntimeError("non-alphanumeric import " 
+                                + current_import + " for " + filename)     
+
+                        # add dependency
+                        libraries[library_name]["dependencies"].append(current_import)
+
+                    libraries[library_name]["dependencies"].sort()
+
                 # parse contract
                 elif line.find("contract") == 0:
 
@@ -100,55 +114,25 @@ for (dirpath, dirnames, filenames) in walk(OPENZEPPELIN_PATH):
                     contracts[contract_name] = {}
                     filepaths[contract_name] = current_path
 
-                    # find dependencies
-                    is_index = line.find(" is ")
-                    if is_index == -1:
-                        continue # if no dependencies, we are done
+                    if len(imports) == 0:
+                        continue # if no imports, we are done
 
-                    if "dependencies" not in contracts[contract_name]:
-                        contracts[contract_name]["dependencies"] = []
+                    # if "dependencies" not in contracts[contract_name]:
+                    contracts[contract_name]["dependencies"] = []
 
-                    # get dependencies
-                    tokens = line[is_index + 4:].split()
+                    # iterate over imports to add depdendencies
+                    for i in range(len(imports)):
 
-                    # iterate over dependencies (last token is "{\n")
-                    for i in range(len(tokens) - 1):
+                        current_import = imports[i]
 
-                        current_token = tokens[i]
-
-                        # remove comma
-                        if current_token[-1] == ",":
-                            current_token = current_token[:-1]
-
-                        if not current_token.isalnum():
-                            continue # ignore non-alphanumeric tokens     
+                        if not current_import.isalnum():
+                            raise RuntimeError("non-alphanumeric import " 
+                                + current_import + " for " + filename)     
 
                         # add dependency
-                        contracts[contract_name]["dependencies"].append(current_token)
+                        contracts[contract_name]["dependencies"].append(current_import)
 
                     contracts[contract_name]["dependencies"].sort()
-
-                # add library used by contract as dependency
-                elif line.find("using ") != -1:
-
-                    split_line = line.split()
-
-                    # "using" must be the first token
-                    if split_line[0] != "using":
-                        continue
-
-                    # sanity check/defensive programming
-                    if len(contract_name) > 0 and len(library_name) > 0:
-                        raise RuntimeError("library_name and contract_name simultaneously non-empty")
-                    if len(library_name) > 0:
-                        raise RuntimeError("library_name non-empty and found 'using' statement")
-                    if len(contract_name) == 0:
-                        raise RuntimeError("contract_name empty and found 'using' statement")
-
-                    # add dependency (will always be the second token)
-                    if "dependencies" not in contracts[contract_name]:
-                        contracts[contract_name]["dependencies"] = []
-                    contracts[contract_name]["dependencies"].append(split_line[1])
 
 # Write contracts and dependencies as JSON
 

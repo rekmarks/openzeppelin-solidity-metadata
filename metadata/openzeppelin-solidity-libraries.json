@@ -4,6 +4,11 @@
   "Math": {}, 
   "MerkleProof": {}, 
   "Roles": {}, 
-  "SafeERC20": {}, 
+  "SafeERC20": {
+    "dependencies": [
+      "ERC20", 
+      "ERC20Basic"
+    ]
+  }, 
   "SafeMath": {}
 }

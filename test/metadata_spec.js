@@ -1,6 +1,5 @@
+
 const expect = require('chai').expect
-// const should = require('chai').should
-// const expect = chai.expect
 
 describe('contract and library metadata', () => {
 

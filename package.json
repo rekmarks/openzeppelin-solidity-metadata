@@ -5,7 +5,9 @@
   "main": "index.js",
   "scripts": {
     "test": "mocha",
-    "get-names-and-dependencies": "python ./getters/get-names-and-dependencies.py"
+    "get-names-and-dependencies": "python ./getters/get-names-and-dependencies.py",
+    "get-compiled-contracts-and-libraries": "node ./getters/get-compiled-contracts-and-libraries.js",
+    "generate-metadata": "npm run get-names-and-dependencies && npm run get-compiled-contracts-and-libraries"
   },
   "repository": {
     "type": "git",

@@ -57,10 +57,24 @@ for (dirpath, dirnames, filenames) in walk(OPENZEPPELIN_PATH):
             library_name = ""
             contract_name = ""
 
+            imports = []
+
             for line in file:
 
+                if line.find("import") == 0:
+
+                    split_line = line.split("/")
+
+                    current_import = split_line[-1]
+                    current_import = current_import[:-2]
+
+                    if current_import in imports:
+                        raise RuntimeError("import already added")
+
+                    imports.append(current_import)
+
                 # parse library
-                if line.find("library") == 0:
+                elif line.find("library") == 0:
                     
                     ### testing: manually verify library declaration lines ###
                     # print(line)

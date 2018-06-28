@@ -9,13 +9,13 @@ Install using `npm install openzeppelin-solidity-metadata`. After importing the 
     - an object of all OpenZeppelin contract names as strings to object values
         - `compiled`
             - the compiled contract, from `solc.compile()`
-        - `dependencies`
+        - `dependencies` (if any exist)
             - a sorted array of dependencies
 - `libraries`
     - an object of OpenZeppelin library names to object values
         - `compiled`
             - the compiled library, from `solc.compile()`
-        - `dependencies`
+        - `dependencies` (if any exist)
             - a sorted array of dependencies
 
 ### notes

@@ -14,17 +14,25 @@ OPENZEPPELIN_PATH = "./node_modules/openzeppelin-solidity"
 
 CONTRACTS_PATH = "./metadata/openzeppelin-solidity-contracts.json"
 LIBRARIES_PATH = "./metadata/openzeppelin-solidity-libraries.json"
-FILE_PATHS_PATH = "./metadata/openzeppelin-solidity-filepaths.json"
+FILEPATHS_PATH = "./metadata/openzeppelin-solidity-filepaths.json"
 
-# formatting
-INDENT_LEVEL = 2
+# helper function to write data to file at filepath, first deleting the file if
+# it already exists
+def writeFile(filepath, data):
 
-# storage
+    # remove file if it already exists
+    if path.isfile(filepath):
+        remove(filepath)
+
+    # create file and write data to it
+    with open(filepath, "w") as data_file:
+        json.dump(data, data_file, indent=2, sort_keys=True)
+
+# Get dependencies
+
 contracts = {}
 libraries = {}
 filepaths = {}
-
-# Get dependencies
 
 # walk through openzeppelin directory
 for (dirpath, dirnames, filenames) in walk(OPENZEPPELIN_PATH):
@@ -136,26 +144,6 @@ for (dirpath, dirnames, filenames) in walk(OPENZEPPELIN_PATH):
 
 # Write contracts and dependencies as JSON
 
-# remove contracts file if it already exists
-if path.isfile(CONTRACTS_PATH):
-    remove(CONTRACTS_PATH)
-
-# create and write contracts file
-with open(CONTRACTS_PATH, "w") as contracts_file:
-    json.dump(contracts, contracts_file, indent=INDENT_LEVEL, sort_keys=True)
-
-# remove libraries file if it already exists
-if path.isfile(LIBRARIES_PATH):
-    remove(LIBRARIES_PATH)
-
-# create and write libraries file
-with open(LIBRARIES_PATH, "w") as libraries_file:
-    json.dump(libraries, libraries_file, indent=INDENT_LEVEL, sort_keys=True)
-
-# remove file paths file if it already exists
-if path.isfile(FILE_PATHS_PATH):
-    remove(FILE_PATHS_PATH)
-
-# create and write libraries file
-with open(FILE_PATHS_PATH, "w") as filepaths_file:
-    json.dump(filepaths, filepaths_file, indent=INDENT_LEVEL, sort_keys=True)
+writeFile(CONTRACTS_PATH, contracts)
+writeFile(LIBRARIES_PATH, libraries)
+writeFile(FILEPATHS_PATH, filepaths)

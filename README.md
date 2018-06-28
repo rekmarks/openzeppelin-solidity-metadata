@@ -20,7 +20,7 @@ Install using `npm install openzeppelin-solidity-metadata`. After importing the 
 
 ### notes
 - JSON data current as of OpenZeppelin `1.10.0`
-- Does not include `openzeppelin-solidity/contracts/mocks` and `openzeppelin-solidity/contracts/examples` from the OpenZeppelin repo
+- Only includes contracts from the `openzeppelin-solidity` npm package, not e.g. `/mocks` and `/examples` from the GitHub repo
 - The `Bounty` contract requires a separately deployed `Target` contract to function, even though it does not *depend* on it, and therefore isn't listed as a dependency
 - A Solidity `library` can neither inherit nor be inherited, but they can use interfaces and can have dependencies
 

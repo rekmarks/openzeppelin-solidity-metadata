@@ -5,8 +5,8 @@
   "main": "index.js",
   "scripts": {
     "test": "mocha",
-    "get-names-and-dependencies": "python ./getters/get-names-and-dependencies.py",
-    "get-compiled-contracts-and-libraries": "node ./getters/get-compiled-contracts-and-libraries.js",
+    "get-names-and-dependencies": "python ./getters/1-get-names-and-dependencies.py",
+    "get-compiled-contracts-and-libraries": "node ./getters/2-get-compiled-contracts-and-libraries.js",
     "get-all-metadata": "npm run get-names-and-dependencies && npm run get-compiled-contracts-and-libraries"
   },
   "repository": {

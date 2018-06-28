@@ -39,6 +39,24 @@ function compileAll() {
 
   let inheritables, compiled, collection
 
+  let inputJSON = {
+    'language': 'Solidity',
+    'sources': {},
+    'settings': {
+      'optimizer': {
+        'enabled': 'false', // this is the default, here for clarity
+      },
+      'metadata': {
+        'useLiteralContent': 'true',
+      },
+    },
+    'outputSelection': {
+      '*': {
+        '*': [ 'abi', 'evm.bytecode', 'metadata'],
+      }
+    }
+  }
+
   // iterate through contracts and libraries
   // (let key in allKeys) doesn't work here for some reason
   for (let i = 0; i < allKeys.length; i++) {
@@ -58,12 +76,28 @@ function compileAll() {
 
     // compile contract with its dependencies, optimizer enabled, callback for
     // handling relative import paths
-    compiled = solc.compile({sources: inheritables}, 1, (path) => {
+    // compiled = solc.compile({sources: inheritables}, 1, (path) => {
+
+    //   // return just the filename, which will match to key in the inheritables object
+    //   let split_path = path.split('/')
+    //   return {contents: inheritables[split_path[split_path.length - 1]]}
+    // })
+
+    inputJSON.sources = inheritables
+
+    // console.log(inputJSON)
+    // console.log()
+
+    compiled = solc.compileStandardWrapper(inputJSON, (path) => {
+      // compiled = solc.compileStandardWrapper(JSON.stringify(inputJSON), (path) => {
 
       // return just the filename, which will match to key in the inheritables object
       let split_path = path.split('/')
       return {contents: inheritables[split_path[split_path.length - 1]]}
     })
+
+    console.log(compiled)
+    console.log()
 
     if (Object.keys(compiled.contracts).length === 0) {
       throw new Error('contract or library ' + key + ' didn\'t compile')

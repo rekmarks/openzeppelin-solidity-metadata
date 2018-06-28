@@ -1,14 +1,14 @@
 {
-  "AddressUtils": {},
-  "ECRecovery": {},
-  "Math": {},
-  "MerkleProof": {},
-  "Roles": {},
+  "AddressUtils": {}, 
+  "ECRecovery": {}, 
+  "Math": {}, 
+  "MerkleProof": {}, 
+  "Roles": {}, 
   "SafeERC20": {
     "dependencies": [
-      "ERC20",
+      "ERC20", 
       "ERC20Basic"
     ]
-  },
+  }, 
   "SafeMath": {}
 }

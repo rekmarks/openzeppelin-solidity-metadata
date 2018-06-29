@@ -1,5 +1,5 @@
 
-const expect = require('chai').expect
+const assert = require('chai').assert
 
 describe('contract and library metadata', () => {
 
@@ -15,31 +15,16 @@ describe('contract and library metadata', () => {
   // console.log(filepaths)
   // console.log('\n')
 
-  it('metadata objects have correct number of keys', () => {
-
-    expect(contracts.length === 61)
-    expect(libraries.length === 7)
-    expect(filepaths.length === data.contracts.length + data.libraries.length)
-
-    for (let key in contracts) {
-      expect(contracts[key].length === 2)
-    }
-
-    for (let key in libraries) {
-      expect(libraries[key].length === 1)
-    }
-  })
-
   it('metadata object values have no undefined values', () => {
 
     for (let key in contracts) {
       for (let _key in contracts[key]) {
-        expect(typeof contracts[key][_key] !== 'undefined')
+        assert(typeof contracts[key][_key] !== 'undefined')
       }
     }
     for (let key in libraries) {
       for (let _key in libraries[key]) {
-        expect(typeof libraries[key][_key] !== 'undefined')
+        assert(typeof libraries[key][_key] !== 'undefined')
       }
     }
 
@@ -54,32 +39,36 @@ describe('contract and library metadata', () => {
 
     for (let key in contracts) {
 
-      expect(typeof key === 'string')
+      assert(typeof key === 'string')
 
       for (let _key in contracts[key]) {
 
         switch (_key) {
           case 'dependencies':
-            expect(Array.isArray(contracts[key][_key]))
+            assert(Array.isArray(contracts[key][_key]))
+            break
           case 'compiled':
-            expect(typeof contracts[key][_key] === 'object')
-            expect(typeof contracts[key][_key]['opcodes'] === 'string')
+            assert(typeof contracts[key][_key] === 'object')
+            assert(typeof contracts[key][_key]['opcodes'] === 'string')
+            break
         }
       }
     }
 
     for (let key in libraries) {
 
-      expect(typeof key === 'string')
+      assert(typeof key === 'string')
 
       for (let _key in libraries[key]) {
 
         switch (_key) {
           case 'dependencies':
-            expect(Array.isArray(libraries[key][_key]))
+            assert(Array.isArray(libraries[key][_key]))
+            break
           case 'compiled':
-            expect(typeof libraries[key][_key] === 'object')
-            expect(typeof libraries[key][_key]['opcodes'] === 'string')
+            assert(typeof libraries[key][_key] === 'object')
+            assert(typeof libraries[key][_key]['opcodes'] === 'string')
+            break
         }
       }
     }

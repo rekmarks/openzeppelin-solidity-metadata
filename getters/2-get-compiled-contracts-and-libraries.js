@@ -1,4 +1,5 @@
 
+const contracts_dependencies_path = "./metadata/openzeppelin-solidity-contracts-dependencies.json"
 const filepaths_path = './metadata/openzeppelin-solidity-filepaths.json'
 const contracts_path = './metadata/openzeppelin-solidity-contracts.json'
 const libraries_path = './metadata/openzeppelin-solidity-libraries.json'
@@ -7,7 +8,7 @@ const fs = require('fs')
 const solc = require('solc')
 const filepaths = require('.' + filepaths_path)
 
-let contracts = require('.' + contracts_path)
+let contracts = require('.' + contracts_dependencies_path)
 let libraries = require('.' + libraries_path)
 let allKeys = Object.keys(contracts)
 allKeys.concat(Object.keys(libraries))
@@ -107,6 +108,10 @@ function getDependencySources(solFiles, dependencies) {
 
   // if we have yet to see this contract or library
   if (!solFiles.hasOwnProperty(inheritable + '.sol')) {
+
+    if (!filepaths[inheritable]) {
+      throw new Error('inheritable ' + inheritable + ' not in filepaths')
+    }
 
     // add contract source to solFiles
     solFiles[inheritable + '.sol'] = fs.readFileSync('.' + filepaths[inheritable], 'utf8')

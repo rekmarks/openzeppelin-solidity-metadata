@@ -12,7 +12,7 @@ import json
 # input file root path
 OPENZEPPELIN_PATH = "./node_modules/openzeppelin-solidity"
 
-CONTRACTS_PATH = "./metadata/openzeppelin-solidity-contracts.json"
+CONTRACTS_PATH = "./metadata/openzeppelin-solidity-contracts-dependencies.json"
 LIBRARIES_PATH = "./metadata/openzeppelin-solidity-libraries.json"
 FILEPATHS_PATH = "./metadata/openzeppelin-solidity-filepaths.json"
 
@@ -37,16 +37,19 @@ filepaths = {}
 # walk through openzeppelin directory
 for (dirpath, dirnames, filenames) in walk(OPENZEPPELIN_PATH):
 
-    ### only if using repo instead of npm dist ###
-    # ignore mocks and examples
-    # if dirpath.endswith("mocks") or dirpath.endswith("examples"):
-    #     continue
+    # ignore mocks and examples, if using OpenZeppelin repo instead of npm dist
+    if dirpath.endswith("mocks") or dirpath.endswith("examples"):
+        continue
 
     # for filename in current directory
     for filename in filenames:
 
         # only check Solidity files
         if len(filename) < 5 or not filename.endswith(".sol"):
+            continue
+
+        # say no to deprecated contracts
+        if filename.find("Deprecated") != -1:
             continue
 
         current_path = dirpath + "/" + filename
@@ -109,7 +112,7 @@ for (dirpath, dirnames, filenames) in walk(OPENZEPPELIN_PATH):
                     libraries[library_name]["dependencies"].sort()
 
                 # parse contract
-                elif line.find("contract") == 0:
+                elif line.find("contract") == 0 or line.find("interface") == 0:
 
                     ### testing: manually verify contract declaration lines ###
                     # print(line)

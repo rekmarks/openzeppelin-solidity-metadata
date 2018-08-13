@@ -1,0 +1,335 @@
+{
+  "AllowanceCrowdsale": {
+    "dependencies": [
+      "Crowdsale", 
+      "ERC20", 
+      "ERC20Basic", 
+      "SafeERC20", 
+      "SafeMath"
+    ]
+  }, 
+  "BasicToken": {
+    "dependencies": [
+      "ERC20Basic", 
+      "SafeMath"
+    ]
+  }, 
+  "Bounty": {
+    "dependencies": [
+      "Destructible", 
+      "PullPayment"
+    ]
+  }, 
+  "BurnableToken": {
+    "dependencies": [
+      "BasicToken"
+    ]
+  }, 
+  "CanReclaimToken": {
+    "dependencies": [
+      "ERC20Basic", 
+      "Ownable", 
+      "SafeERC20"
+    ]
+  }, 
+  "CappedCrowdsale": {
+    "dependencies": [
+      "Crowdsale", 
+      "SafeMath"
+    ]
+  }, 
+  "CappedToken": {
+    "dependencies": [
+      "MintableToken"
+    ]
+  }, 
+  "Claimable": {
+    "dependencies": [
+      "Ownable"
+    ]
+  }, 
+  "ConditionalEscrow": {
+    "dependencies": [
+      "Escrow"
+    ]
+  }, 
+  "Contactable": {
+    "dependencies": [
+      "Ownable"
+    ]
+  }, 
+  "Crowdsale": {
+    "dependencies": [
+      "ERC20", 
+      "SafeERC20", 
+      "SafeMath"
+    ]
+  }, 
+  "DelayedClaimable": {
+    "dependencies": [
+      "Claimable"
+    ]
+  }, 
+  "Destructible": {
+    "dependencies": [
+      "Ownable"
+    ]
+  }, 
+  "DetailedERC20": {
+    "dependencies": [
+      "ERC20"
+    ]
+  }, 
+  "ERC165": {}, 
+  "ERC20": {
+    "dependencies": [
+      "ERC20Basic"
+    ]
+  }, 
+  "ERC20Basic": {}, 
+  "ERC20TokenMetadata": {
+    "dependencies": [
+      "ERC20"
+    ]
+  }, 
+  "ERC20WithMetadata": {
+    "dependencies": [
+      "ERC20"
+    ]
+  }, 
+  "ERC721": {
+    "dependencies": [
+      "ERC721Basic"
+    ]
+  }, 
+  "ERC721Basic": {
+    "dependencies": [
+      "ERC165"
+    ]
+  }, 
+  "ERC721BasicToken": {
+    "dependencies": [
+      "AddressUtils", 
+      "ERC721Basic", 
+      "ERC721Receiver", 
+      "SafeMath", 
+      "SupportsInterfaceWithLookup"
+    ]
+  }, 
+  "ERC721Enumerable": {
+    "dependencies": [
+      "ERC721Basic"
+    ]
+  }, 
+  "ERC721Holder": {
+    "dependencies": [
+      "ERC721Receiver"
+    ]
+  }, 
+  "ERC721Metadata": {
+    "dependencies": [
+      "ERC721Basic"
+    ]
+  }, 
+  "ERC721Receiver": {}, 
+  "ERC721Token": {
+    "dependencies": [
+      "ERC721", 
+      "ERC721BasicToken", 
+      "SupportsInterfaceWithLookup"
+    ]
+  }, 
+  "Escrow": {
+    "dependencies": [
+      "Ownable", 
+      "SafeMath"
+    ]
+  }, 
+  "FinalizableCrowdsale": {
+    "dependencies": [
+      "Ownable", 
+      "SafeMath", 
+      "TimedCrowdsale"
+    ]
+  }, 
+  "HasNoContracts": {
+    "dependencies": [
+      "Ownable"
+    ]
+  }, 
+  "HasNoEther": {
+    "dependencies": [
+      "Ownable"
+    ]
+  }, 
+  "HasNoTokens": {
+    "dependencies": [
+      "CanReclaimToken"
+    ]
+  }, 
+  "Heritable": {
+    "dependencies": [
+      "Ownable"
+    ]
+  }, 
+  "IncreasingPriceCrowdsale": {
+    "dependencies": [
+      "SafeMath", 
+      "TimedCrowdsale"
+    ]
+  }, 
+  "IndividuallyCappedCrowdsale": {
+    "dependencies": [
+      "Crowdsale", 
+      "Ownable", 
+      "SafeMath"
+    ]
+  }, 
+  "LimitBalance": {}, 
+  "MintableToken": {
+    "dependencies": [
+      "Ownable", 
+      "StandardToken"
+    ]
+  }, 
+  "MintedCrowdsale": {
+    "dependencies": [
+      "Crowdsale", 
+      "MintableToken"
+    ]
+  }, 
+  "NoOwner": {
+    "dependencies": [
+      "HasNoContracts", 
+      "HasNoEther", 
+      "HasNoTokens"
+    ]
+  }, 
+  "Ownable": {}, 
+  "Pausable": {
+    "dependencies": [
+      "Ownable"
+    ]
+  }, 
+  "PausableToken": {
+    "dependencies": [
+      "Pausable", 
+      "StandardToken"
+    ]
+  }, 
+  "PostDeliveryCrowdsale": {
+    "dependencies": [
+      "ERC20", 
+      "SafeMath", 
+      "TimedCrowdsale"
+    ]
+  }, 
+  "PullPayment": {
+    "dependencies": [
+      "Escrow"
+    ]
+  }, 
+  "RBAC": {
+    "dependencies": [
+      "Roles"
+    ]
+  }, 
+  "RBACMintableToken": {
+    "dependencies": [
+      "MintableToken", 
+      "RBAC"
+    ]
+  }, 
+  "ReentrancyGuard": {}, 
+  "RefundEscrow": {
+    "dependencies": [
+      "ConditionalEscrow", 
+      "Ownable"
+    ]
+  }, 
+  "RefundableCrowdsale": {
+    "dependencies": [
+      "FinalizableCrowdsale", 
+      "RefundEscrow", 
+      "SafeMath"
+    ]
+  }, 
+  "SignatureBouncer": {
+    "dependencies": [
+      "ECRecovery", 
+      "Ownable", 
+      "RBAC"
+    ]
+  }, 
+  "SplitPayment": {
+    "dependencies": [
+      "SafeMath"
+    ]
+  }, 
+  "StandardBurnableToken": {
+    "dependencies": [
+      "BurnableToken", 
+      "StandardToken"
+    ]
+  }, 
+  "StandardToken": {
+    "dependencies": [
+      "BasicToken", 
+      "ERC20"
+    ]
+  }, 
+  "Superuser": {
+    "dependencies": [
+      "Ownable", 
+      "RBAC"
+    ]
+  }, 
+  "SupportsInterfaceWithLookup": {
+    "dependencies": [
+      "ERC165"
+    ]
+  }, 
+  "Target": {
+    "dependencies": [
+      "Destructible", 
+      "PullPayment"
+    ]
+  }, 
+  "TimedCrowdsale": {
+    "dependencies": [
+      "Crowdsale", 
+      "SafeMath"
+    ]
+  }, 
+  "TokenDestructible": {
+    "dependencies": [
+      "ERC20Basic", 
+      "Ownable"
+    ]
+  }, 
+  "TokenTimelock": {
+    "dependencies": [
+      "SafeERC20"
+    ]
+  }, 
+  "TokenVesting": {
+    "dependencies": [
+      "ERC20Basic", 
+      "Ownable", 
+      "SafeERC20", 
+      "SafeMath"
+    ]
+  }, 
+  "Whitelist": {
+    "dependencies": [
+      "Ownable", 
+      "RBAC"
+    ]
+  }, 
+  "WhitelistedCrowdsale": {
+    "dependencies": [
+      "Crowdsale", 
+      "Whitelist"
+    ]
+  }
+}

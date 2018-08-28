@@ -4,9 +4,9 @@
   "description": "OpenZeppelin Solidity metadata in JSON format",
   "main": "index.js",
   "scripts": {
-    "test": "mocha",
-    "get-names-and-dependencies": "python ./getters/1-get-names-and-dependencies.py",
-    "get-compiled-contracts-and-libraries": "node ./getters/2-get-compiled-contracts-and-libraries.js",
+    "test": "mocha ./src/test",
+    "get-names-and-dependencies": "python ./src/get-names-and-dependencies.py",
+    "get-compiled-contracts-and-libraries": "node ./src/get-compiled-contracts-and-libraries.js",
     "get-all-metadata": "npm run get-names-and-dependencies && npm run get-compiled-contracts-and-libraries"
   },
   "repository": {
@@ -33,5 +33,6 @@
     "mocha": "^5.2.0",
     "openzeppelin-solidity": "1.12.0",
     "solc": "^0.4.24"
-  }
+  },
+  "dependencies": {}
 }

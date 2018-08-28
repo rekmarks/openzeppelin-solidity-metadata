@@ -3,10 +3,10 @@ const assert = require('chai').assert
 
 describe('contract and library metadata', () => {
 
-  const data = require('../index.js')
+  const data = require('../../index.js')
   const contracts = data.contracts
   const libraries = data.libraries
-  const filepaths = require('../metadata/openzeppelin-solidity-filepaths.json')
+  const filepaths = require('../../metadata/openzeppelin-solidity-filepaths.json')
 
   // console.log(contracts)
   // console.log('\n')

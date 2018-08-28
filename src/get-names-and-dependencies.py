@@ -6,7 +6,6 @@ Solidity library.
 '''
 
 from os import walk, remove, path
-from sys import argv, exit
 import json
 
 # input file root path

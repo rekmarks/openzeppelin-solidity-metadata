@@ -4,10 +4,7 @@
   "description": "OpenZeppelin Solidity metadata in JSON format",
   "main": "index.js",
   "scripts": {
-    "test": "mocha ./src/test",
-    "get-names-and-dependencies": "python ./src/get-names-and-dependencies.py",
-    "get-compiled-contracts-and-libraries": "node ./src/get-compiled-contracts-and-libraries.js",
-    "get-all-metadata": "npm run get-names-and-dependencies && npm run get-compiled-contracts-and-libraries"
+    "get-metadata-py": "python ./src/get_metadata.py"
   },
   "repository": {
     "type": "git",
@@ -29,10 +26,14 @@
   },
   "homepage": "https://github.com/rekmarks/openzeppelin-solidity-metadata#readme",
   "devDependencies": {
-    "chai": "^4.1.2",
+    "chai": "^4.2.0",
     "mocha": "^5.2.0",
-    "openzeppelin-solidity": "1.12.0",
-    "solc": "^0.4.24"
+    "openzeppelin-solidity": "^2.1.1",
+    "solc": "^0.5.2",
+    "truffle": "^5.0.1"
   },
-  "dependencies": {}
+  "dependencies": {
+    "python-shell": "^1.0.7",
+    "time-stamp": "^2.2.0"
+  }
 }

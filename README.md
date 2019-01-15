@@ -2,7 +2,7 @@
 Retrieves your Solidity dependencies and other metadata as JSON.
 
 ## example output
-~~
+```
 {
   "Address": {
     "compiler": "^0.5.0",
@@ -24,7 +24,7 @@ Retrieves your Solidity dependencies and other metadata as JSON.
   },
   ...
 }
-~~
+```
 
 # usage
 - install using `npm install solidity-metadata`

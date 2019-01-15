@@ -1,14 +1,15 @@
 {
-  "name": "openzeppelin-solidity-metadata",
-  "version": "1.4.2",
-  "description": "OpenZeppelin Solidity metadata in JSON format",
+  "name": "solidity-metadata",
+  "version": "1.0.0",
+  "description": "Retrieves your Solidity dependencies and other metadata as JSON",
   "main": "index.js",
   "scripts": {
-    "get-metadata-py": "python ./src/get_metadata.py"
+    "get-metadata": "node ./src/getMetadataScript.js",
+    "get-openzeppelin-metadata": "npm run get-metadata -- node_modules/openzeppelin-solidity/contracts"
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/rekmarks/openzeppelin-solidity-metadata.git"
+    "url": "git+https://github.com/rekmarks/solidity-metadata.git"
   },
   "keywords": [
     "solidity",
@@ -22,17 +23,15 @@
   },
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/rekmarks/openzeppelin-solidity-metadata/issues"
+    "url": "https://github.com/rekmarks/solidity-metadata/issues"
   },
-  "homepage": "https://github.com/rekmarks/openzeppelin-solidity-metadata#readme",
+  "homepage": "https://github.com/rekmarks/solidity-metadata#readme",
   "devDependencies": {
     "chai": "^4.2.0",
-    "mocha": "^5.2.0",
-    "openzeppelin-solidity": "^2.1.1",
-    "solc": "^0.5.2",
-    "truffle": "^5.0.1"
+    "mocha": "^5.2.0"
   },
   "dependencies": {
+    "openzeppelin-solidity": "^2.1.1",
     "python-shell": "^1.0.7",
     "time-stamp": "^2.2.0"
   }

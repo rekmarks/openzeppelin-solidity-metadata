@@ -5,35 +5,27 @@ Script for retrieving entity (contract, library, interface) names and
 dependencies from the OpenZeppelin Solidity library.
 '''
 
-from os import walk, remove, path
+from os import walk, remove, path, makedirs
 import json
 import sys
 
-# input file root path
-OPENZEPPELIN_PATH = './node_modules/openzeppelin-solidity'
-
-FILEPATHS_PATH = './metadata/oz-filepaths.json'
-METADATA_PATH = './metadata/oz-metadata.json'
-
 def main():
     '''
-    Gets OpenZeppelin metadata or takes a directory path and two output paths
-    and returns metadata for all Solidity entities in the directory path
-    and outputs results to the output paths.
+    Gets takes a directory path and two output paths and returns metadata for
+    all Solidity entities in the directory path and outputs results to the
+    the output paths as JSON files.
 
-    Takes 0 or 3 parameters.
+    Expects 3 parameters from sys.argv, see function body.
     '''
 
-    if len(sys.argv) not in (1, 4):
+    if len(sys.argv) != 4:
         raise ValueError(
-            'Expected 0 or 3 parameters but received: ' + str(len(sys.argv) - 1)
+            'Expected 3 parameters but received: ' + str(len(sys.argv) - 1)
         )
 
-    args = False if len(sys.argv) == 1 else True
-
-    solidity_root_path = OPENZEPPELIN_PATH if not args else sys.argv[1]
-    metadata_path = METADATA_PATH if not args else sys.argv[2]
-    filepaths_path = FILEPATHS_PATH if not args else sys.argv[3]
+    solidity_root_path = sys.argv[1]
+    metadata_path = sys.argv[2]
+    filepaths_path = sys.argv[3]
 
     metadata, filepaths = getMetadata(solidity_root_path)
 
@@ -41,9 +33,11 @@ def main():
     writeFile(filepaths_path, filepaths)
     writeFile(metadata_path, metadata)
 
-# helper function to write data to file at filepath as JSON, first deleting the
-# file if it already exists
 def writeFile(filepath, data):
+
+    # attempt to create directory if it doesn't exist
+    directory = path.dirname(filepath)
+    if not path.exists(directory): makedirs(directory)
 
     # create file and write data to it as JSON, deleting what's already there
     with open(filepath, 'w') as data_file:

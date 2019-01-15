@@ -1,6 +1,6 @@
 
-const metadata = require('./metadata/oz-metadata.json')
+const getMetadata = require('./src/getMetadata.js')
 
 module.exports = {
-  'OpenZeppelinMetadata': metadata,
+  getMetadata: getMetadata,
 }

@@ -1,33 +1,48 @@
-# openzeppelin-solidity-metadata
-OpenZeppelin Solidity metadata, in JSON format.
+# solidity-metadata
+Retrieves your Solidity dependencies and other metadata as JSON.
 
-Not endorsed by or affiliated with Zeppelin or OpenZeppelin.
+## example output
+~~
+{
+  "Address": {
+    "compiler": "^0.5.0",
+    "dependencies": [],
+    "name": "Address",
+    "type": "library"
+  },
+  "AllowanceCrowdsale": {
+    "compiler": "^0.5.0",
+    "dependencies": [
+      "Crowdsale",
+      "IERC20",
+      "Math",
+      "SafeERC20",
+      "SafeMath"
+    ],
+    "name": "AllowanceCrowdsale",
+    "type": "contract"
+  },
+  ...
+}
+~~
 
-## usage
-Install using `npm install openzeppelin-solidity-metadata`. After importing the package, you can access the following properties:
-- `contractDependencies`
-    - an object of all OpenZeppelin contract names as strings object values
-        - `dependencies` (if any exist)
-            - a sorted array of dependencies
-- `contracts`
-    - an object of all OpenZeppelin contract names as strings to object values
-        - `compiled`
-            - the compiled contract, from `solc.compile()`
-        - `dependencies` (if any exist)
-            - a sorted array of dependencies
-- `libraries`
-    - an object of OpenZeppelin library names to object values
-        - `compiled`
-            - the compiled library, from `solc.compile()`
-        - `dependencies` (if any exist)
-            - a sorted array of dependencies
+# usage
+- install using `npm install solidity-metadata`
+- use `npm run get-metadata` and specify a directory to get the metadata of all
+  Solidity files therein
+  - e.g. `npm run get-metadata -- path/to/my/directory`
+  - you can also use `npm run get-openzeppelin-metadata` to get the metadata of
+    the OpenZeppelin contracts, libraries, and interfaces (check package.json
+    to see which version)
+- by default, metadata is output to the `metadata` folder in the project root, but
+  you can specify another directory as the second parameter
+- a Python script does the heavy lifting
+  - Use the third parameter to specify a
+    path to your local Python installation if it gives you trouble
 
-### notes
-- JSON data current as of OpenZeppelin `1.12.0`
-- contract data includes interfaces
-- Only includes contracts from the `openzeppelin-solidity` npm package, not e.g. `/mocks` and `/examples` from the GitHub repo
-- The `Bounty` contract requires a separately deployed `Target` contract to function, even though it does not *depend* on it, and therefore isn't listed as a dependency
-- A Solidity `library` can neither inherit nor be inherited, but they can use interfaces and can have dependencies
-
-## dev
-To re-generate data, clone the repo and run the desired scripts described in `package.json`. This requires Python.
+If importing the package, you can access the following properties:
+- ``getMetadata``
+    - a function that, given a root directory for some Solidity files, writes
+      their metadata and filepaths as JSON files to the project `metadata`
+      or another specified directory
+    - returns the paths to the output files
